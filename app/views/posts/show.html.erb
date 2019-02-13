@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @post.text %>
+</p>
+
+<%= image_tag(@post.image_url, :width => 600) if @post.image.present? %>
+
+<p>
+  <strong>Date:</strong>
+  <%= @post.date %>
+</p>
+
+<h3>Comments</h3>
+    <% @post.comments.each do |comment| %>
+        <div>
+            <strong><%= comment.commenter %></strong>
+            <br />
+            <p><%= comment.body %></p>
+            <p><%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+        </div>
+    <% end %>
+<%= render 'comments/form' %>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
